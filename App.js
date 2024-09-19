@@ -20,7 +20,11 @@ const Tab = createMaterialBottomTabNavigator();
 // Stack for the login flow (Signup and Login screens)
 function LoginFlow() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
