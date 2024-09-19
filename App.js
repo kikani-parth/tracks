@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { Provider as AuthProvider } from './src/context/AuthContext';
 
-// Import your screens
 import SignupScreen from './src/screens/SignupScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
@@ -18,7 +18,7 @@ const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 // Stack for the login flow (Signup and Login screens)
-function LoginFlow() {
+const LoginFlow = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -29,10 +29,10 @@ function LoginFlow() {
       <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
   );
-}
+};
 
 // Stack for track list flow (Track List and Track Detail screens)
-function TrackListFlow() {
+const TrackListFlow = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -52,10 +52,10 @@ function TrackListFlow() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 // Tab Navigator for the main flow
-function MainFlow() {
+const MainFlow = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -75,10 +75,10 @@ function MainFlow() {
       />
     </Tab.Navigator>
   );
-}
+};
 
 // Root Navigator to mimic SwitchNavigator behavior
-function RootNavigator() {
+const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
@@ -93,13 +93,23 @@ function RootNavigator() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 // App container
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
       <RootNavigator />
     </NavigationContainer>
   );
-}
+};
+
+const AppWithProvider = () => {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+};
+
+export default AppWithProvider;
