@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import { navigationRef } from './src/NavigationService';
 
 import SignupScreen from './src/screens/SignupScreen';
 import LoginScreen from './src/screens/LoginScreen';
@@ -98,7 +99,7 @@ const RootNavigator = () => {
 // App container
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <RootNavigator />
     </NavigationContainer>
   );
