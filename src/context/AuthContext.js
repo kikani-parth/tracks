@@ -9,10 +9,19 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: action.payload };
     case 'signup':
       return { ...state, errorMessage: '', token: action.payload };
-
+    case 'login':
+      return { ...state, errorMessage: '', token: action.payload };
+    case 'clear_error_message':
+      return { ...state, errorMessage: '' };
     default:
       return state;
   }
+};
+
+const clearErrorMessage = (dispatch) => {
+  return () => {
+    dispatch({ type: 'clear_error_message' });
+  };
 };
 
 const signup = (dispatch) => {
@@ -38,7 +47,25 @@ const signup = (dispatch) => {
 };
 
 const login = (dispatch) => {
-  return ({ email, password }) => {};
+  return async ({ email, password }) => {
+    try {
+      const response = await trackerApi.post('/login', { email, password });
+
+      // Store the jwt token
+      await AsyncStorage.setItem('token', response.data.token);
+
+      // Update state
+      dispatch({ type: 'login', payload: response.data.token });
+
+      // Navigate to TrackList within TrackListFlow tab
+      navigate('MainFlow', {
+        screen: 'TrackListFlow',
+        params: { screen: 'TrackList' },
+      });
+    } catch (error) {
+      dispatch({ type: 'add_error', payload: 'Something went wrong' });
+    }
+  };
 };
 
 const logout = (dispatch) => {
@@ -47,6 +74,6 @@ const logout = (dispatch) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signup, login, logout },
+  { signup, login, logout, clearErrorMessage },
   { token: null, errorMessage: '' }
 );
