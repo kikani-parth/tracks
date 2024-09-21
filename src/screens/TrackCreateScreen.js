@@ -1,5 +1,5 @@
-// import '../_mockLocation';
-import React, { useState, useEffect } from 'react';
+import '../_mockLocation';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import {
@@ -8,9 +8,12 @@ import {
 } from 'react-native-safe-area-context';
 import Map from '../components/Map';
 import * as Location from 'expo-location';
+import { Context as LocationContext } from '../context/LocationContext';
 
 const TrackCreateScreen = () => {
   const insets = useSafeAreaInsets();
+
+  const { addLocation } = useContext(LocationContext);
   const [errorMsg, setErrorMsg] = useState(null);
 
   const startWatching = async () => {
@@ -27,11 +30,12 @@ const TrackCreateScreen = () => {
       },
       (location) => {
         console.log(location);
+        addLocation(location);
       }
     );
 
-    let currentLocation = await Location.getCurrentPositionAsync({});
-    setUserLocation(currentLocation.coords);
+    // let currentLocation = await Location.getCurrentPositionAsync({});
+    // setUserLocation(currentLocation.coords);
   };
 
   useEffect(() => {
