@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { navigationRef } from './src/NavigationService';
+import { Provider as LocationProvider } from './src/context/LocationContext';
 
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -109,9 +110,11 @@ const App = () => {
 
 const AppWithProvider = () => {
   return (
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <LocationProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </LocationProvider>
   );
 };
 

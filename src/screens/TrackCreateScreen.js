@@ -1,4 +1,4 @@
-import '../_mockLocation';
+// import '../_mockLocation';
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
@@ -19,6 +19,16 @@ const TrackCreateScreen = () => {
       setErrorMsg('Permission to access location was denied');
       return;
     }
+    await Location.watchPositionAsync(
+      {
+        accuracy: Location.Accuracy.BestForNavigation,
+        timeInterval: 1000,
+        distanceInterval: 10,
+      },
+      (location) => {
+        console.log(location);
+      }
+    );
 
     let currentLocation = await Location.getCurrentPositionAsync({});
     setUserLocation(currentLocation.coords);
