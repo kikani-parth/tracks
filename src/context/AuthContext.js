@@ -13,6 +13,8 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: '', token: action.payload };
     case 'clear_error_message':
       return { ...state, errorMessage: '' };
+    case 'logout':
+      return { ...state, token: null, errorMessage: '' };
     default:
       return state;
   }
@@ -27,6 +29,9 @@ const tryLocalLogin = (dispatch) => {
         screen: 'TrackListFlow',
         params: { screen: 'TrackList' },
       });
+    } else {
+      // Navigate to Login screen within LoginFlow
+      navigate('LoginFlow', { screen: 'Login' });
     }
   };
 };
@@ -82,7 +87,14 @@ const login = (dispatch) => {
 };
 
 const logout = (dispatch) => {
-  return () => {};
+  return async () => {
+    // Remove the token from AsyncStorage
+    await AsyncStorage.removeItem('token');
+    dispatch({ type: 'logout' });
+
+    // Navigate to Login screen within LoginFlow
+    navigate('LoginFlow', { screen: 'Login' });
+  };
 };
 
 export const { Provider, Context } = createDataContext(
