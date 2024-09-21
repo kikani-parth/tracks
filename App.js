@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { navigationRef } from './src/NavigationService';
 
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
@@ -82,6 +83,7 @@ const MainFlow = () => {
 const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ResolveAuth" component={ResolveAuthScreen} />
       <Stack.Screen
         name="LoginFlow"
         component={LoginFlow}
