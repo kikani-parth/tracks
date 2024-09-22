@@ -16,15 +16,18 @@ const TrackCreateScreen = () => {
   const insets = useSafeAreaInsets();
 
   const isFocused = useIsFocused();
-  const { state, addLocation } = useContext(LocationContext);
+  const {
+    state: { recording },
+    addLocation,
+  } = useContext(LocationContext);
 
   const callback = useCallback(
     (location) => {
-      addLocation(location, state.recording);
+      addLocation(location, recording);
     },
-    [state.recording]
+    [recording]
   );
-  const [errorMsg] = useLocation(isFocused, callback);
+  const [errorMsg] = useLocation(isFocused || recording, callback);
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>

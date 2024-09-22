@@ -11,8 +11,6 @@ const TrackForm = () => {
     changeName,
   } = useContext(LocationContext);
 
-  console.log(locations.length);
-
   return (
     <View>
       <Input
@@ -34,6 +32,16 @@ const TrackForm = () => {
           onPress={startRecording}
         />
       )}
+
+      {!recording && locations.length ? (
+        <Button
+          title="Save Recording"
+          buttonStyle={[
+            styles.buttonStyle,
+            { marginTop: 25, backgroundColor: '#00A36C' },
+          ]}
+        />
+      ) : null}
     </View>
   );
 };
