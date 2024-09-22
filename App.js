@@ -2,9 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Provider as AuthProvider } from './src/context/AuthContext';
 import { navigationRef } from './src/NavigationService';
+import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as LocationProvider } from './src/context/LocationContext';
+import { Provider as TrackProvider } from './src/context/TrackContext';
 
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -110,11 +111,13 @@ const App = () => {
 
 const AppWithProvider = () => {
   return (
-    <LocationProvider>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </LocationProvider>
+    <TrackProvider>
+      <LocationProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </LocationProvider>
+    </TrackProvider>
   );
 };
 
