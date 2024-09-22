@@ -9,13 +9,14 @@ import {
 import Map from '../components/Map';
 import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
+import { useIsFocused } from '@react-navigation/native';
 
 const TrackCreateScreen = () => {
   const insets = useSafeAreaInsets();
 
+  const isFocused = useIsFocused();
   const { addLocation } = useContext(LocationContext);
-
-  const [errorMsg] = useLocation(addLocation); // Same as (location) => addLocation(location)
+  const [errorMsg] = useLocation(isFocused, addLocation); // Same as (location) => addLocation(location)
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
