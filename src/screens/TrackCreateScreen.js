@@ -16,8 +16,10 @@ const TrackCreateScreen = () => {
   const insets = useSafeAreaInsets();
 
   const isFocused = useIsFocused();
-  const { addLocation } = useContext(LocationContext);
-  const [errorMsg] = useLocation(isFocused, addLocation); // Same as (location) => addLocation(location)
+  const { state, addLocation } = useContext(LocationContext);
+  const [errorMsg] = useLocation(isFocused, (location) => {
+    addLocation(location, state.recording);
+  });
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
