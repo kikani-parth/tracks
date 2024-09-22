@@ -6,6 +6,7 @@ import { navigationRef } from './src/NavigationService';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as LocationProvider } from './src/context/LocationContext';
 import { Provider as TrackProvider } from './src/context/TrackContext';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -43,7 +44,7 @@ const TrackListFlow = () => {
         name="TrackList"
         component={TrackListScreen}
         options={{
-          headerTitle: '',
+          headerTitle: 'Tracks',
           headerLeft: null,
         }}
       />
@@ -65,17 +66,40 @@ const MainFlow = () => {
       <Tab.Screen
         name="TrackListFlow"
         component={TrackListFlow}
-        options={{ tabBarLabel: 'Tracks' }}
+        options={{
+          tabBarLabel: 'Tracks',
+          tabBarIcon: () => {
+            return (
+              <MaterialIcons
+                name="format-list-bulleted"
+                size={24}
+                color="black"
+              />
+            );
+          },
+        }}
       />
       <Tab.Screen
         name="TrackCreate"
         component={TrackCreateScreen}
-        options={{ tabBarLabel: 'Create Track' }}
+        options={{
+          tabBarLabel: 'Add Track',
+          tabBarIcon: () => {
+            return <MaterialIcons name="add" size={24} color="black" />;
+          },
+        }}
       />
       <Tab.Screen
         name="Account"
         component={AccountScreen}
-        options={{ tabBarLabel: 'Account' }}
+        options={{
+          tabBarLabel: 'Account',
+          tabBarIcon: () => {
+            return (
+              <MaterialIcons name="account-circle" size={24} color="black" />
+            );
+          },
+        }}
       />
     </Tab.Navigator>
   );

@@ -11,8 +11,8 @@ const TrackDetailScreen = ({ route }) => {
   const initialCoords = track.locations[0].coords;
 
   return (
-    <View>
-      <Text>{track.name}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>{track.name}</Text>
       <MapView
         initialRegion={{
           ...initialCoords,
@@ -28,8 +28,16 @@ const TrackDetailScreen = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {},
+  title: {
+    fontSize: 30,
+    alignSelf: 'center',
+    marginTop: 15,
+  },
+
   map: {
-    height: 300,
+    marginTop: 15,
+    height: '100%',
   },
 });
 

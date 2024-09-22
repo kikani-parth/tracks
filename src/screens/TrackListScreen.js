@@ -15,8 +15,8 @@ const TrackListScreen = ({ navigation }) => {
 
   return (
     <>
-      <Text h3>TrackListScreen</Text>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={state}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => {

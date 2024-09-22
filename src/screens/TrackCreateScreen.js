@@ -31,7 +31,7 @@ const TrackCreateScreen = () => {
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      <Text h2 style={styles.title}>
+      <Text h3 style={styles.title}>
         Create a Track
       </Text>
       <Map />
