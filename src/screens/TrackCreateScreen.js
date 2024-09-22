@@ -10,6 +10,7 @@ import Map from '../components/Map';
 import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
 import { useIsFocused } from '@react-navigation/native';
+import TrackForm from '../components/TrackForm';
 
 const TrackCreateScreen = () => {
   const insets = useSafeAreaInsets();
@@ -20,13 +21,21 @@ const TrackCreateScreen = () => {
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      <Text h2>Create a Track</Text>
+      <Text h2 style={styles.title}>
+        Create a Track
+      </Text>
       <Map />
       {errorMsg ? <Text>{errorMsg}</Text> : null}
+      <TrackForm />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  title: {
+    margin: 10,
+    alignSelf: 'center',
+  },
+});
 
 export default TrackCreateScreen;
