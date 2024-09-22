@@ -1,5 +1,5 @@
 import '../_mockLocation';
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import {
@@ -17,9 +17,14 @@ const TrackCreateScreen = () => {
 
   const isFocused = useIsFocused();
   const { state, addLocation } = useContext(LocationContext);
-  const [errorMsg] = useLocation(isFocused, (location) => {
-    addLocation(location, state.recording);
-  });
+
+  const callback = useCallback(
+    (location) => {
+      addLocation(location, state.recording);
+    },
+    [state.recording]
+  );
+  const [errorMsg] = useLocation(isFocused, callback);
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>

@@ -1,12 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Input, Button } from 'react-native-elements';
 import { View, StyleSheet } from 'react-native';
+import { Context as LocationContext } from '../context/LocationContext';
 
 const TrackForm = () => {
+  const {
+    state: { name, recording, locations },
+    startRecording,
+    stopRecording,
+    changeName,
+  } = useContext(LocationContext);
+
+  console.log(locations.length);
+
   return (
     <View>
-      <Input placeholder="Enter name" inputStyle={styles.inputStyle} />
-      <Button title="Start Recording" buttonStyle={styles.buttonStyle} />
+      <Input
+        placeholder="Enter name"
+        inputStyle={styles.inputStyle}
+        value={name}
+        onChangeText={changeName}
+      />
+      {recording ? (
+        <Button
+          title="Stop Recording"
+          buttonStyle={[styles.buttonStyle, { backgroundColor: 'red' }]}
+          onPress={stopRecording}
+        />
+      ) : (
+        <Button
+          title="Start Recording"
+          buttonStyle={styles.buttonStyle}
+          onPress={startRecording}
+        />
+      )}
     </View>
   );
 };
